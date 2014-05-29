@@ -5,25 +5,27 @@ public class System {
 		//Let canSenseListener be a new CanSenseListeners
 		
 	}
-	
 
+    //  Search for can
+    public void searchForCan() {
+    //	Register canSenseListener
+    //  Register canTouchListener
+    //  Rotate
+    }
 //	Let canTouchListener be a new CanTouchListener
 //	Let lineDetectListener be a new LineDetectListener
 //	Let timeCompleteListener be a new TimeCompletedListener
 //	Let timerListenerAndTime be a new TimerListenerAndTime
 //
-//Set timerListenerAndTime’s listener to be timeCompleteListener
-//		Set timerListenerAndTime’s time to be 60 seconds
+//Set timerListenerAndTimeï¿½s listener to be timeCompleteListener
+//		Set timerListenerAndTimeï¿½s time to be 60 seconds
 //
 //		Register lineDetectListener
 //		Register timeListenerAndTime
 //
 //Search for Can
 //	
-//	Search for Can
-//		Register canSenseListener
-//Register canTouchListener
-//Rotate
+
 //
 //	Rotate
 //		Move one motor forward
