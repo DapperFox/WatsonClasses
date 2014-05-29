@@ -1,4 +1,6 @@
-package com.watson;
+package com.watson.notifiers;
+
+import com.watson.listeners.IListener;
 
 public interface INotifier {
     void run();
