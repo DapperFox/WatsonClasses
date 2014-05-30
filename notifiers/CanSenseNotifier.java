@@ -1,6 +1,9 @@
 package com.watson.notifiers;
 
 import com.watson.listeners.IListener;
+import lejos.nxt.LCD;
+import lejos.nxt.SensorPort;
+import lejos.nxt.UltrasonicSensor;
 
 import java.util.ArrayList;
 
@@ -9,13 +12,20 @@ import java.util.ArrayList;
  */
 public class CanSenseNotifier implements INotifier, Runnable{
     ArrayList<IListener> listeners = new ArrayList<IListener>();
+
+    public CanSenseNotifier() {
+        Thread thread = new Thread(this);
+        thread.start();
+    }
+
     @Override
     public void run() {
+        UltrasonicSensor ultrasonicSensor = new UltrasonicSensor(SensorPort.S4);
         while(true) {
-            //read sensor
-            //if can sensed
-            for(IListener listener : listeners){
-                listener.handleNotification();
+            if(ultrasonicSensor.getRange() < 150) {
+                for(IListener listener : listeners){
+                    listener.handleNotification();
+                }
             }
         }
     }

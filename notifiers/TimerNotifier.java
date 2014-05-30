@@ -16,6 +16,10 @@ public class TimerNotifier implements Runnable {
 //    notify listener
 //    Register
 //            Unregister
+    public TimerNotifier() {
+        Thread thread = new Thread(this);
+        thread.start();
+    }
     TimeListenerAndTime timeListenerAndTime;
     @Override
     public void run() {

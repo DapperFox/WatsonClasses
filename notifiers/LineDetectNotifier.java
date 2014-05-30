@@ -1,6 +1,9 @@
 package com.watson.notifiers;
 
 import com.watson.listeners.IListener;
+import lejos.nxt.LCD;
+import lejos.nxt.LightSensor;
+import lejos.nxt.SensorPort;
 
 import java.util.ArrayList;
 
@@ -19,15 +22,21 @@ public class LineDetectNotifier implements INotifier, Runnable{
 //    Add listener to list of listeners
 //    Unregister
 //    Remove listener to list of listeners
-
     ArrayList<IListener> listeners = new ArrayList<IListener>();
+
+    public LineDetectNotifier() {
+        Thread thread = new Thread(this);
+        thread.start();
+    }
     @Override
     public void run() {
+        LightSensor lightSensor = new LightSensor(SensorPort.S1);
         while(true) {
-            //read sensor
-            //if can sensed
-            for(IListener listener : listeners){
-                listener.handleNotification();
+            if(lightSensor.getNormalizedLightValue() < 330) {
+                LCD.drawString(""+lightSensor.getNormalizedLightValue(), 0,3);
+                for (IListener listener : listeners) {
+                    listener.handleNotification();
+                }
             }
         }
     }

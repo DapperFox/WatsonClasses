@@ -1,6 +1,8 @@
 package com.watson.notifiers;
 
 import com.watson.listeners.IListener;
+import lejos.nxt.SensorPort;
+import lejos.nxt.TouchSensor;
 
 import java.util.ArrayList;
 
@@ -17,11 +19,19 @@ public class CanTouchNotifier implements INotifier, Runnable {
 //	Unregister
 //		Remove listener from list of listeners
     ArrayList<IListener> listeners = new ArrayList<IListener>();
+    public CanTouchNotifier() {
+        Thread thread = new Thread(this);
+        thread.start();
+    }
     @Override
     public void run() {
+        TouchSensor touchSensor = new TouchSensor(SensorPort.S3);
         while(true) {
-            for(IListener listener : listeners){
-                listener.handleNotification();
+            if(touchSensor.isPressed()) {
+
+                for (IListener listener : listeners) {
+                    listener.handleNotification();
+                }
             }
         }
     }
