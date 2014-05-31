@@ -1,16 +1,14 @@
 package com.watson.listeners;
 
-import com.watson.RobotSystem;
-import lejos.nxt.Motor;
+import com.watson.Main;
 
 /**
  * Created by blakebishop on 5/29/14.
  */
 public class LineDetectListener implements IListener {
+    //todo if it's moving backward it needs to move forward
     @Override
     public void handleNotification() {
-        RobotSystem system = new RobotSystem();
-        system.stop();
-        system.moveBackward();
+        Main.robotSystem.moveBackward();
     }
 }

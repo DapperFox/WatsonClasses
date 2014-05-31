@@ -22,7 +22,8 @@ public class CanSenseNotifier implements INotifier, Runnable{
     public void run() {
         UltrasonicSensor ultrasonicSensor = new UltrasonicSensor(SensorPort.S4);
         while(true) {
-            if(ultrasonicSensor.getRange() < 150) {
+            LCD.drawString("Ultrasonic: " + ultrasonicSensor.getRange(), 0, 3);
+            if(ultrasonicSensor.getRange() < 40) {
                 for(IListener listener : listeners){
                     listener.handleNotification();
                 }

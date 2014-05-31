@@ -1,5 +1,6 @@
 package com.watson.listeners;
 
+import com.watson.Main;
 import com.watson.RobotSystem;
 import lejos.nxt.Motor;
 
@@ -9,9 +10,6 @@ import lejos.nxt.Motor;
 public class CanSensedListener implements IListener {
     @Override
     public void handleNotification() {
-        RobotSystem system = new RobotSystem();
-        system.stop();
-        system.moveForward();
-
+        Main.robotSystem.moveForward();
     }
 }

@@ -6,7 +6,6 @@ import lejos.nxt.*;
 
 public class RobotSystem {
 //	When the system is created
-    boolean systemRunning = true;
     private CanSensedListener csl;
     private CanTouchListener ctl;
     private LineDetectListener ldl;
@@ -16,15 +15,14 @@ public class RobotSystem {
     private LineDetectNotifier ldn;
 
 	public RobotSystem(){
-//        csl = new CanSensedListener();
-//        ctl = new CanTouchListener();
-//        ldl = new LineDetectListener();
-//        tcl = new TimerCompleteListener();
-//        csn = new CanSenseNotifier();
-//        ctn = new CanTouchNotifier();
-//        ldn = new LineDetectNotifier();
-
-//        ldn.register(ldl);
+        csl = new CanSensedListener();
+        ctl = new CanTouchListener();
+        ldl = new LineDetectListener();
+        tcl = new TimerCompleteListener();
+        csn = new CanSenseNotifier();
+        ctn = new CanTouchNotifier();
+        ldn = new LineDetectNotifier();
+        ldn.register(ldl);
 		//  Let canSenseListener be a new CanSenseListeners
         //	Let canTouchListener be a new CanTouchListener
         //	Let lineDetectListener be a new LineDetectListener
@@ -33,9 +31,18 @@ public class RobotSystem {
 	}
 
     public void test() {
+//            LightSensor ls = new LightSensor(SensorPort.S1);
+//            LCD.drawString("" + ls.readNormalizedValue(), 0, 0);
+//            Button.waitForAnyPress();
+//            ls.calibrateHigh();
+//            Button.waitForAnyPress();
+//            ls.calibrateLow();
+//        while(true) {
+//            LCD.drawString("" + ls.readNormalizedValue(), 0, 0);
+//        }
         while(true) {
-            LightSensor ls = new LightSensor(SensorPort.S1);
-            LCD.drawString("" + ls.readNormalizedValue(), 0, 0);
+            UltrasonicSensor us = new UltrasonicSensor(SensorPort.S4);
+            LCD.drawString("" + us.getRange(), 0, 0);
         }
     }
     //  Search for can
@@ -57,45 +64,45 @@ public class RobotSystem {
     public void rotate() {
 //		Move one motor forward
 //		Move second motor backward
-        Motor.B.setSpeed(200);
-        Motor.C.setSpeed(200);
+        Motor.B.setSpeed(150);
+        Motor.C.setSpeed(120);
         Motor.B.forward();
         Motor.C.backward();
     }
-//	Move Forward
+//	    Move Forward
 //		Move both motors forward
     public void moveForward() {
-        Motor.B.setSpeed(300);
-        Motor.C.setSpeed(300);
-        Motor.B.forward();
-        Motor.C.forward();
+            LCD.drawString("Move State", 0, 0);
+            Motor.B.setSpeed(300);
+            Motor.C.setSpeed(300);
+            Motor.B.forward();
+            Motor.C.forward();
     }
 //
 //	Move Can
     public void moveCan() {
-        moveForward();
-        Sound.beep();
+        tone();
 //			Move forward
 //			Play solid tone
     }
 //	Move Backward
     public void moveBackward() {
+        LCD.drawString("Backward State", 0, 0);
         csn.unregister(csl);
         ctn.unregister(ctl);
-
         Motor.B.setSpeed(300);
-        Motor.C.setSpeed(300);
-        Motor.B.backward();
-        Motor.C.backward();
+        Motor.C.setSpeed(280);
+            Motor.B.backward();
+            Motor.C.backward();
+            beep();
+
 
         //todo implement timer here
         try {
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        stop();
         searchForCan();
         //		Unregister canSenseListener
 //		Unregister canTouchListener
@@ -113,6 +120,7 @@ public class RobotSystem {
 
 //	Stop
     public void stop() {
+        LCD.drawString("Stop State", 0, 0);
         Motor.B.stop();
         Motor.C.stop();
     }
@@ -121,14 +129,18 @@ public class RobotSystem {
 //	Beep
     public void beep() {
         //todo may change to beep
-        Sound.beepSequence();
+        Sound.beep();
+        Sound.beep();
+        Sound.beep();
+        Sound.beep();
+        Sound.beep();
 //		Play beep
     }
 //Solid Tone
     public void tone() {
         //todo figure out solid tone
 //		Play solid tone
-        Sound.buzz();
+        Sound.playTone(1000, 3000);
     }
 
 //	Celebration Music

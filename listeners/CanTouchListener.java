@@ -1,5 +1,6 @@
 package com.watson.listeners;
 
+import com.watson.Main;
 import com.watson.RobotSystem;
 import lejos.nxt.Sound;
 
@@ -9,7 +10,6 @@ import lejos.nxt.Sound;
 public class CanTouchListener implements IListener {
     @Override
     public void handleNotification() {
-        RobotSystem system = new RobotSystem();
-        system.moveCan();
+        Main.robotSystem.moveCan();
     }
 }
