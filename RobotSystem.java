@@ -130,9 +130,9 @@ public class RobotSystem {
     public void beep() {
         //todo may change to beep
         Sound.beep();
+        Thread.sleep(500);
         Sound.beep();
-        Sound.beep();
-        Sound.beep();
+        Thread.sleep(500);
         Sound.beep();
 //		Play beep
     }
@@ -145,7 +145,7 @@ public class RobotSystem {
 
 //	Celebration Music
     public void celebrationMusic() {
-        Sound.twoBeeps();
+
 //		Play celebration music
     }
 

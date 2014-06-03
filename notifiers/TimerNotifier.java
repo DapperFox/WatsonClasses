@@ -20,7 +20,7 @@ public class TimerNotifier implements Runnable {
         Thread thread = new Thread(this);
         thread.start();
     }
-    TimeListenerAndTime timeListenerAndTime;
+
     @Override
     public void run() {
         while(true) {
